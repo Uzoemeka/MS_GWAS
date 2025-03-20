@@ -4,7 +4,7 @@
 library(tidyr);library(lattice); library(lmtest); library(readxl);library(car); library(backports)     # to revive the isFALSE() function for sim_slopes()
 library(effects);library(ggplot2);library(interactions); library(lme4); library(lmerTest)      
 library(psych); library(plyr);library(dplyr);library(R2MLwiN);library(data.table)
-options(MLwiN_path='/Users/uzoemeka/Documents/mlnscript')
+options(MLwiN_path='/path/mlnscript')
 library(writexl);library(haven);library(tidyverse);library(nlme);library(curl);library(rstan);library(brms)
 library(lubridate);library(kableExtra);library(foreign);library(multcomp);library(groupdata2);library(merTools)
 
@@ -13,8 +13,7 @@ library(lubridate);library(kableExtra);library(foreign);library(multcomp);librar
 #                 DATA
 #====================================================================================
 rm(list = ls())
-file_name <- "/Users/uzoemeka/Documents/MLM_Analysis/MLM/Edssdatatata2nd_three_month.dta"
-papis <- read_dta(file_name)
+papis <- read_dta("Edssdatatata2nd_three_month.dta")
 papis <- as.data.frame(papis)
 names(papis)[names(papis) == 'date'] <- 'relapseDate'
 
@@ -85,7 +84,7 @@ for(i in id){
 papis_quarter$DMT.cat[papis_quarter$DMT.cat == 0.5]<- 1
 length(unique(papis_quarter$patid))
 
-pca <- fread("/Users/uzoemeka/Documents/MLM_Analysis/MLM/MS_GWAS/Karim/karim_clean_threemonths_pca1.eigenvec")
+pca <- fread("karim_clean_threemonths_pca1.eigenvec")
 pca <- pca[,c(1:7)]
 pca$ids <- sub("^[^_]*_", "", pca$FID)
 head(pca,2)
@@ -98,7 +97,7 @@ length(unique(pca$FID))
 # karim_clean_threemonths_imputed_noFID_500kto5001k.raw
 
 
-di <- "/Users/uzoemeka/Documents/MLM_Analysis/MLM/MS_GWAS/Karim/Raw_data_split_3"
+di <- "Raw_data_split_3"
 raw_file <- fread(paste(di, "/karim_clean_threemonths_imputed_noFID_split_103.raw", sep = ""))
 head(raw_file[,1:10],2); dim(raw_file)
 #raw_file <- raw_file[,1:10]
@@ -106,7 +105,7 @@ raw_file$ids <- sub("^[^_]*_", "",sub("^[^_]*_", "",sub("^[^_]*_", "",sub("^[^_]
 length(unique(raw_file$IID))
 length(unique(raw_file$ids))
 
-ids <- fread("/Users/uzoemeka/Documents/MLM_Analysis/MLM/MS_GWAS/all.ids_Genotyped_patients_threemonthspostrelapse.csv")
+ids <- fread("all.ids_Genotyped_patients_threemonthspostrelapse.csv")
 ids$ids <- ids$IID
 
 rawfile <- merge(raw_file, ids, by = "ids")
@@ -241,7 +240,6 @@ results_list <- mclapply(loop_vars, fit_model, mc.cores = num_cores)
 results <- do.call(rbind, results_list)
 
 head(results,3); dim(results)
-de <- "/Users/uzoemeka/Documents/MLM_Analysis/MLM/MS_GWAS/Karim/gwas_results"
 write.table(results, paste(de, "/Direct_MLM_gwas_results_split_103.txt", sep = ""), col.names = T, row.names = F, quote = F)
 
 
@@ -249,7 +247,7 @@ write.table(results, paste(de, "/Direct_MLM_gwas_results_split_103.txt", sep = "
 
 #____________ GWAS results
 rm(list=ls())
-paths_gwas <- fs::dir_ls("/Users/uzoemeka/Documents/MLM_Analysis/MLM/MS_GWAS/Karim/gwas_results/")
+paths_gwas <- fs::dir_ls("/gwas_results/")
 paths_gwas <- paths_gwas[which(grepl("Direct",paths_gwas))]
 length(paths_gwas)
 
