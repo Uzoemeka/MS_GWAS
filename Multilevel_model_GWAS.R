@@ -13,7 +13,7 @@ library(lubridate);library(kableExtra);library(foreign);library(multcomp);librar
 #                 DATA
 #====================================================================================
 rm(list = ls())
-file_name <- basename("/Users/uzoemeka/Documents/MLM_Analysis/MLM/Edssdatatata2nd_three_month.dta")
+file_name <- "/Users/uzoemeka/Documents/MLM_Analysis/MLM/Edssdatatata2nd_three_month.dta"
 papis <- read_dta(file_name)
 papis <- as.data.frame(papis)
 names(papis)[names(papis) == 'date'] <- 'relapseDate'
