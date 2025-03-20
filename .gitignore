@@ -4,3 +4,4 @@
 .httr-oauth
 .DS_Store
 .quarto
+.options(MLwiN_path='/Users/uzoemeka/Documents/mlnscript')
