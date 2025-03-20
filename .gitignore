@@ -4,4 +4,11 @@
 .httr-oauth
 .DS_Store
 .quarto
-.options(MLwiN_path='/Users/uzoemeka/Documents/mlnscript')
+
+# Ignore all files in a specific directory
+
+
+
+
+# Ignore all files in a directory but not the directory itself
+/Users/uzoemeka/Documents/*
